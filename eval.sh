@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA_DIR="../nuscenes"
+DATA_DIR="./nuscenes"
 # there should be ${DATA_DIR}/full_v1.0/
 # and also ${DATA_DIR}/mini
 
@@ -13,7 +13,7 @@ python eval_nuscenes.py \
        --exp_name=${EXP_NAME} \
        --dset='mini' \
        --data_dir=$DATA_DIR \
-       --log_dir='logs_eval_nuscenes' \
+       --log_dir='/tmp/output/logs_eval_nuscenes' \
        --init_dir="checkpoints/${MODEL_NAME}" \
        --res_scale=1 \
        --device_ids=[0]
