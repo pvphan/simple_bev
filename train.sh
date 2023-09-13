@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DATA_DIR="../nuscenes"
+DATA_DIR="nuscenes"
 # there should be ${DATA_DIR}/full_v1.0/
 # and also ${DATA_DIR}/mini
 
@@ -13,7 +13,7 @@ python train_nuscenes.py \
        --exp_name=${EXP_NAME} \
        --max_iters=25000 \
        --log_freq=1000 \
-       --dset='mini' \
+       --dset='v1.0-mini' \
        --batch_size=1 \
        --grad_acc=5 \
        --data_dir=$DATA_DIR \
@@ -23,5 +23,5 @@ python train_nuscenes.py \
        --ncams=6 \
        --encoder_type='res101' \
        --do_rgbcompress=True \
-       --device_ids=[0] 
+       --device_ids=[0]
 

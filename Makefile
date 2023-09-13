@@ -17,23 +17,20 @@ RUN_FLAGS = \
 	--volume=/tmp/simple_bev/output:/tmp/output \
 	${IMAGE_TAG}
 
-shell:
+shell: image
 	docker run ${RUN_FLAGS} bash
 
-image:
-	docker build --tag ${IMAGE_TAG} .
-
-train:
+train: image
 	docker run ${RUN_FLAGS} \
 		python train_nuscenes.py \
 		       --exp_name="rgb_mine" \
 		       --max_iters=25000 \
 		       --log_freq=1000 \
-		       --dset='trainval' \
+		       --dset='mini' \
 		       --batch_size=8 \
 		       --grad_acc=5 \
 		       --use_scheduler=True \
-		       --data_dir='./nuscenes' \
+		       --data_dir='nuscenes' \
 		       --log_dir='/tmp/output/logs_nuscenes' \
 		       --ckpt_dir='checkpoints' \
 		       --res_scale=2 \
@@ -41,3 +38,7 @@ train:
 		       --encoder_type='res101' \
 		       --do_rgbcompress=True \
 		       --device_ids=[0,1,2,3]
+
+image:
+	docker build --tag ${IMAGE_TAG} .
+
